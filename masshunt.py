@@ -10,9 +10,12 @@ def check(url):
         data = urlopen(url)
         headers = data.info()
 
-        if not "X-Frame-Options" in headers: return True
-
-    except: return False
+        if "X-Frame-Options" in headers or "Content-Security-Policy" in headers: 
+            return False
+        else:
+            return True
+    except:
+        return False
 
 
 def create_poc(url):
